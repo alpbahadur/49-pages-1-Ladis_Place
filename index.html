@@ -3,9 +3,1181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website</title>
+    <title>Ladi's Place - Traditional Seafood Restaurant in Puerto Rico Since 1949</title>
+    <meta name="description" content="A Traditional Seafood Restaurant in Puerto Rico. Visit one of our three seaside restaurants, you will discover locals best-kept secrets of Puerto Rico with the freshest seafood, fantastic sunset views, live music, and excellent service.">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            overflow-x: hidden;
+            background: #F8F9FA;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Ocean Background Animation */
+        .ocean-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(180deg, #E8F4F8 0%, #B8DDE8 50%, #89CFF0 100%);
+            opacity: 0.3;
+        }
+
+        /* Navigation Styles */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #006994;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            background: linear-gradient(135deg, #006994 0%, #0089B8 100%);
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        /* Hero Section */
+        .hero-overlay {
+            background: linear-gradient(135deg, rgba(0, 105, 148, 0.7) 0%, rgba(0, 137, 184, 0.5) 100%);
+        }
+
+        .hero-title {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards;
+            animation-delay: 0.2s;
+        }
+
+        .hero-subtitle {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards;
+            animation-delay: 0.4s;
+        }
+
+        .hero-cta {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards;
+            animation-delay: 0.6s;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Button Styles */
+        .btn-primary {
+            background: linear-gradient(135deg, #006994 0%, #0089B8 100%);
+            padding: 16px 40px;
+            border-radius: 50px;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 105, 148, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(0, 105, 148, 0.4);
+        }
+
+        .btn-secondary {
+            padding: 14px 38px;
+            border-radius: 50px;
+            border: 2px solid currentColor;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Fade In Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Image Zoom Effect */
+        .image-container {
+            overflow: hidden;
+            border-radius: 12px;
+        }
+
+        .image-zoom {
+            transition: transform 0.5s ease;
+        }
+
+        .image-container:hover .image-zoom {
+            transform: scale(1.05);
+        }
+
+        /* Section Divider */
+        .section-divider {
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #006994 0%, #0089B8 100%);
+            margin: 20px auto;
+        }
+
+        /* Glass Effect */
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .glass-effect:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Location Cards */
+        .location-card {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .location-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #006994 0%, #0089B8 100%);
+        }
+
+        .location-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 50px rgba(0, 105, 148, 0.15);
+        }
+
+        /* Timeline */
+        .timeline-item {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.6s ease;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #004d6b 0%, #006994 100%);
+            color: white;
+        }
+
+        /* Scroll Indicator */
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(10px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(5px) translateX(-50%);
+            }
+        }
+
+        .animate-bounce {
+            animation: bounce 2s infinite;
+        }
+
+        /* Image Loading */
+        img {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        img.loaded {
+            opacity: 1;
+        }
+
+        /* Text Shadow for Hero */
+        .text-shadow {
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Reservation Form */
+        .form-input {
+            width: 100%;
+            padding: 14px 20px;
+            border-radius: 10px;
+            border: 2px solid #E5E7EB;
+            transition: all 0.3s ease;
+            font-family: 'Lato', sans-serif;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #006994;
+            box-shadow: 0 0 0 3px rgba(0, 105, 148, 0.1);
+        }
+
+        textarea.form-input {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Wave Animation */
+        @keyframes wave {
+            0%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            50% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+        }
+
+        .wave-icon {
+            display: inline-block;
+            animation: wave 2s ease-in-out infinite;
+        }
+
+        /* Menu Item Card */
+        .menu-item {
+            transition: all 0.3s ease;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #006994 0%, #0089B8 100%);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+    </style>
 </head>
 <body>
-    <!-- Content will be added here -->
+    <!-- Ocean Background -->
+    <div class="ocean-background"></div>
+
+    <!-- Canvas for wave particles -->
+    <canvas id="particleCanvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none;"></canvas>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <h1 class="text-2xl md:text-3xl font-bold text-[#006994]" style="font-family: 'Playfair Display', serif; letter-spacing: 2px;">
+                        LADI'S PLACE
+                    </h1>
+                    <p class="text-xs text-gray-600 font-light tracking-wider">EST. 1949</p>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link text-gray-700 hover:text-[#006994] font-medium">Home</a>
+                    <a href="#story" class="nav-link text-gray-700 hover:text-[#006994] font-medium">Our Story</a>
+                    <a href="#locations" class="nav-link text-gray-700 hover:text-[#006994] font-medium">Locations</a>
+                    <a href="#menu" class="nav-link text-gray-700 hover:text-[#006994] font-medium">Menu</a>
+                    <a href="#events" class="nav-link text-gray-700 hover:text-[#006994] font-medium">Events</a>
+                    <a href="#reservations" class="btn-primary text-sm">Reserve a Table</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-[#006994] focus:outline-none">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu md:hidden fixed top-0 right-0 h-full w-64 shadow-2xl z-50">
+            <div class="p-6">
+                <button id="close-menu-btn" class="text-white float-right focus:outline-none">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+                <div class="clear-both mt-12 space-y-6">
+                    <a href="#home" class="block text-white hover:text-[#89CFF0] text-lg">Home</a>
+                    <a href="#story" class="block text-white hover:text-[#89CFF0] text-lg">Our Story</a>
+                    <a href="#locations" class="block text-white hover:text-[#89CFF0] text-lg">Locations</a>
+                    <a href="#menu" class="block text-white hover:text-[#89CFF0] text-lg">Menu</a>
+                    <a href="#events" class="block text-white hover:text-[#89CFF0] text-lg">Events</a>
+                    <a href="#reservations" class="block btn-primary text-center mt-8">Reserve a Table</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <!-- Background Image -->
+        <div class="absolute inset-0 z-0">
+            <img src="./materials/image_1.gif" alt="Ladi's Place Restaurant" class="w-full h-full object-cover loaded" style="filter: brightness(0.9);">
+            <div class="hero-overlay absolute inset-0"></div>
+        </div>
+
+        <!-- Hero Content -->
+        <div class="relative z-10 text-center px-4 max-w-5xl mx-auto">
+            <h2 class="hero-title text-5xl md:text-7xl font-bold text-white mb-6 text-shadow" style="font-family: 'Playfair Display', serif; letter-spacing: 3px;">
+                LADI'S PLACE
+            </h2>
+            <p class="hero-subtitle text-xl md:text-3xl text-white mb-4 font-light text-shadow">
+                Home of the Famous Mojo Isleño
+            </p>
+            <p class="hero-subtitle text-lg md:text-xl text-white mb-10 font-light text-shadow" style="opacity: 0.95;">
+                Fresh Seafood • Sunset Views • Live Music Since 1949
+            </p>
+            <div class="hero-cta space-x-4 flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="tel:787-900-4563" class="btn-primary">Book a Table</a>
+                <a href="#menu" class="btn-secondary border-white text-white hover:bg-white hover:text-[#006994]">View Menu</a>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10">
+            <div class="animate-bounce">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- Welcome Section -->
+    <section class="py-20 md:py-24 bg-white relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-[#006994]" style="font-family: 'Playfair Display', serif;">
+                    Welcome to Ladi's Place
+                </h2>
+                <div class="section-divider"></div>
+                <p class="text-lg max-w-3xl mx-auto text-gray-700 leading-relaxed">
+                    Visit one of our seaside restaurants and you will discover the best-kept secrets of Puerto Rico.
+                    We have TWO locations on the shores of the picturesque beaches of Puerto Rico.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="fade-in text-center p-8 glass-effect rounded-lg">
+                    <div class="text-5xl mb-4 wave-icon">🐟</div>
+                    <h3 class="text-2xl font-bold mb-3 text-[#006994]" style="font-family: 'Playfair Display', serif;">
+                        Fresh Daily Catch
+                    </h3>
+                    <p class="text-gray-600">
+                        Local fishermen provide us with the freshest seafood every single day.
+                    </p>
+                </div>
+
+                <div class="fade-in text-center p-8 glass-effect rounded-lg">
+                    <div class="text-5xl mb-4 wave-icon">🌅</div>
+                    <h3 class="text-2xl font-bold mb-3 text-[#006994]" style="font-family: 'Playfair Display', serif;">
+                        Sunset Views
+                    </h3>
+                    <p class="text-gray-600">
+                        Enjoy breathtaking Caribbean Sea sunsets while dining at both locations.
+                    </p>
+                </div>
+
+                <div class="fade-in text-center p-8 glass-effect rounded-lg">
+                    <div class="text-5xl mb-4 wave-icon">🎵</div>
+                    <h3 class="text-2xl font-bold mb-3 text-[#006994]" style="font-family: 'Playfair Display', serif;">
+                        Live Music
+                    </h3>
+                    <p class="text-gray-600">
+                        Experience authentic Puerto Rican atmosphere with live entertainment.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Story Section -->
+    <section id="story" class="py-20 md:py-24 bg-gradient-to-b from-[#E8F4F8] to-white relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="fade-in">
+                    <span class="badge mb-4">Since 1949</span>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-4 text-[#006994]" style="font-family: 'Playfair Display', serif;">
+                        A Legacy of Excellence
+                    </h2>
+                    <div class="section-divider mx-0"></div>
+                    <p class="text-lg leading-relaxed mb-6 text-gray-700">
+                        Our tradition dates back to 1949, making us one of the first seafood restaurants in Puerto Rico.
+                        Recognized as the original creator of the famous <strong>Mojo Isleño</strong>, we've been serving
+                        authentic Puerto Rican seafood for over 70 years.
+                    </p>
+                    <p class="text-lg leading-relaxed mb-6 text-gray-700">
+                        Our Salinas location is the (OG) original, just one hour away from San Juan. It's a must-see
+                        historical seafood restaurant where local fishermen go fishing daily to provide the freshest catch
+                        to our customers.
+                    </p>
+                    <p class="text-lg leading-relaxed mb-8 text-gray-700">
+                        With breathtaking views, exceptional service, and the freshest seafood in Puerto Rico,
+                        Ladi's Place offers an unforgettable dining experience you won't find anywhere else.
+                    </p>
+                </div>
+                <div class="fade-in image-container">
+                    <img src="./materials/image_2.gif" alt="Ladi's Place History" class="image-zoom w-full h-auto rounded-lg shadow-2xl loaded">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Locations Section -->
+    <section id="locations" class="py-20 md:py-32 bg-white relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-[#006994]" style="font-family: 'Playfair Display', serif;">
+                    Our Two Locations
+                </h2>
+                <div class="section-divider"></div>
+                <p class="text-lg max-w-3xl mx-auto text-gray-700">
+                    Experience authentic Puerto Rican cuisine at both our seaside locations
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
+                <!-- Salinas Location -->
+                <div class="location-card fade-in">
+                    <div class="mb-6">
+                        <span class="badge mb-2">Original Location - Since 1949</span>
+                        <h3 class="text-3xl font-bold mb-2 text-[#006994]" style="font-family: 'Playfair Display', serif;">
+                            Playa de Salinas
+                        </h3>
+                    </div>
+
+                    <div class="mb-6 image-container">
+                        <img src="./materials/image_3.gif" alt="Salinas Location" class="image-zoom w-full h-64 object-cover rounded-lg loaded">
+                    </div>
+
+                    <div class="space-y-4 mb-6">
+                        <div class="flex items-start">
+                            <svg class="w-6 h-6 text-[#006994] mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <div>
+                                <p class="font-semibold text-gray-800">Address</p>
+                                <p class="text-gray-600">Calle A-86 Playa de Salinas<br>Salinas, Puerto Rico 00751</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <svg class="w-6 h-6 text-[#006994] mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <div>
+                                <p class="font-semibold text-gray-800">Hours</p>
+                                <p class="text-gray-600">Sunday-Thursday: 11:00 AM - 10:00 PM<br>Friday-Saturday: 11:00 AM - 12:00 AM</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="text-gray-700 mb-6 leading-relaxed">
+                        The original location where it all began. Experience the birthplace of Mojo Isleño with
+                        spectacular beach views and the freshest catch from local fishermen.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <a href="tel:787-900-4563" class="btn-primary text-center text-sm flex-1">
+                            Call: (787) 900-4563
+                        </a>
+                        <a href="#reservations" class="btn-secondary border-[#006994] text-[#006994] hover:bg-[#006994] hover:text-white text-center text-sm flex-1">
+                            Reserve Now
+                        </a>
+                    </div>
+                </div>
+
+                <!-- San Juan Location -->
+                <div class="location-card fade-in">
+                    <div class="mb-6">
+                        <span class="badge mb-2">Puerta de Tierra</span>
+                        <h3 class="text-3xl font-bold mb-2 text-[#006994]" style="font-family: 'Playfair Display', serif;">
+                            San Juan
+                        </h3>
+                    </div>
+
+                    <div class="mb-6 image-container">
+                        <img src="./materials/image_4.gif" alt="San Juan Location" class="image-zoom w-full h-64 object-cover rounded-lg loaded">
+                    </div>
+
+                    <div class="space-y-4 mb-6">
+                        <div class="flex items-start">
+                            <svg class="w-6 h-6 text-[#006994] mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <div>
+                                <p class="font-semibold text-gray-800">Address</p>
+                                <p class="text-gray-600">Avenida Luis Muñoz Rivera<br>San Juan, 00907, Puerto Rico</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <svg class="w-6 h-6 text-[#006994] mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <div>
+                                <p class="font-semibold text-gray-800">Hours</p>
+                                <p class="text-gray-600">Sunday-Thursday: 11:00 AM - 10:00 PM<br>Friday-Saturday: 11:00 AM - 12:00 AM</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="text-gray-700 mb-6 leading-relaxed">
+                        One of the most popular dining destinations in San Juan with breathtaking views of the Caribbean Sea.
+                        Perfect for relaxing with delicious dishes and cocktails.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <a href="tel:787-824-1900" class="btn-primary text-center text-sm flex-1">
+                            Call: (787) 824-1900
+                        </a>
+                        <a href="#reservations" class="btn-secondary border-[#006994] text-[#006994] hover:bg-[#006994] hover:text-white text-center text-sm flex-1">
+                            Reserve Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-20 md:py-24 bg-gradient-to-b from-[#E8F4F8] to-white relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-[#006994]" style="font-family: 'Playfair Display', serif;">
+                    Our Menu
+                </h2>
+                <div class="section-divider"></div>
+                <p class="text-lg max-w-3xl mx-auto text-gray-700">
+                    Fresh seafood prepared with traditional Puerto Rican flavors and our signature Mojo Isleño
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                <!-- Menu Highlight 1 -->
+                <div class="menu-item fade-in bg-white rounded-lg overflow-hidden shadow-lg">
+                    <div class="image-container">
+                        <img src="./materials/image_5.gif" alt="Mojo Isleño" class="image-zoom w-full h-64 object-cover loaded">
+                    </div>
+                    <div class="p-6">
+                        <span class="badge mb-3">Signature Dish</span>
+                        <h3 class="text-2xl font-bold mb-2 text-[#006994]" style="font-family: 'Playfair Display', serif;">
+                            Mojo Isleño
+                        </h3>
+                        <p class="text-gray-600">
+                            Our famous creation since 1949. Fresh fish prepared with our secret Mojo sauce that made us legendary.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Menu Highlight 2 -->
+                <div class="menu-item fade-in bg-white rounded-lg overflow-hidden shadow-lg">
+                    <div class="image-container">
+                        <img src="./materials/image_1.gif" alt="Fresh Seafood" class="image-zoom w-full h-64 object-cover loaded">
+                    </div>
+                    <div class="p-6">
+                        <span class="badge mb-3">Daily Fresh</span>
+                        <h3 class="text-2xl font-bold mb-2 text-[#006994]" style="font-family: 'Playfair Display', serif;">
+                            Daily Catch
+                        </h3>
+                        <p class="text-gray-600">
+                            The freshest fish and seafood delivered daily by local fishermen. Menu varies based on availability.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Menu Highlight 3 -->
+                <div class="menu-item fade-in bg-white rounded-lg overflow-hidden shadow-lg">
+                    <div class="image-container">
+                        <img src="./materials/image_2.gif" alt="Traditional Dishes" class="image-zoom w-full h-64 object-cover loaded">
+                    </div>
+                    <div class="p-6">
+                        <span class="badge mb-3">Traditional</span>
+                        <h3 class="text-2xl font-bold mb-2 text-[#006994]" style="font-family: 'Playfair Display', serif;">
+                            Puerto Rican Classics
+                        </h3>
+                        <p class="text-gray-600">
+                            Authentic comida criolla prepared with traditional recipes passed down through generations.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center fade-in">
+                <p class="text-lg mb-6 text-gray-700">
+                    Our menu changes frequently based on the daily catch and seasonal availability.
+                </p>
+                <div class="space-x-4 flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <a href="tel:787-900-4563" class="btn-primary">Call for Today's Menu</a>
+                    <a href="#reservations" class="btn-secondary border-[#006994] text-[#006994] hover:bg-[#006994] hover:text-white">Make a Reservation</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Private Events Section -->
+    <section id="events" class="py-20 md:py-32 bg-white relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-[#006994]" style="font-family: 'Playfair Display', serif;">
+                    Private Events & Gatherings
+                </h2>
+                <div class="section-divider"></div>
+                <p class="text-lg max-w-3xl mx-auto text-gray-700">
+                    Create unforgettable memories at one of the most unique venues in Puerto Rico
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 mb-16">
+                <div class="fade-in">
+                    <h3 class="text-3xl font-bold mb-6 text-[#006994]" style="font-family: 'Playfair Display', serif;">
+                        Perfect for Every Occasion
+                    </h3>
+                    <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                        Whether you're planning an intimate family function or a large fundraising reception for 300+ guests,
+                        we have the venue, infrastructure, and cuisine you need for an outstanding event.
+                    </p>
+
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <svg class="w-6 h-6 text-[#006994] mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <div>
+                                <h4 class="font-bold text-gray-800 mb-1">Weddings</h4>
+                                <p class="text-gray-600">Beachfront ceremonies with spectacular sunset views</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <svg class="w-6 h-6 text-[#006994] mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <div>
+                                <h4 class="font-bold text-gray-800 mb-1">Corporate Events</h4>
+                                <p class="text-gray-600">Product launches, celebrations, and fundraising galas</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <svg class="w-6 h-6 text-[#006994] mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <div>
+                                <h4 class="font-bold text-gray-800 mb-1">Social Gatherings</h4>
+                                <p class="text-gray-600">Birthday parties, anniversaries, rehearsal dinners, and more</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fade-in">
+                    <h3 class="text-3xl font-bold mb-6 text-[#006994]" style="font-family: 'Playfair Display', serif;">
+                        Salinas Venue Capacity
+                    </h3>
+                    <div class="bg-gradient-to-br from-[#E8F4F8] to-white p-8 rounded-lg shadow-lg">
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center border-b border-gray-200 pb-3">
+                                <span class="font-semibold text-gray-800">Main Lounge</span>
+                                <span class="text-[#006994] font-bold">500 Guests</span>
+                            </div>
+                            <div class="flex justify-between items-center border-b border-gray-200 pb-3">
+                                <span class="font-semibold text-gray-800">Adjacent Room 1</span>
+                                <span class="text-[#006994] font-bold">250 Guests</span>
+                            </div>
+                            <div class="flex justify-between items-center border-b border-gray-200 pb-3">
+                                <span class="font-semibold text-gray-800">Adjacent Room 2</span>
+                                <span class="text-[#006994] font-bold">150 Guests</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="font-semibold text-gray-800">Private AC Room</span>
+                                <span class="text-[#006994] font-bold">100 Guests</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 p-6 bg-[#006994] text-white rounded-lg">
+                        <p class="font-bold mb-2">Events Coordinator</p>
+                        <p class="mb-2">📞 <a href="tel:787-900-4563" class="hover:underline">(787) 900-4563</a></p>
+                        <p>✉️ <a href="mailto:ladisrest@gmail.com" class="hover:underline">ladisrest@gmail.com</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fade-in bg-gradient-to-r from-[#E8F4F8] to-[#B8DDE8] rounded-2xl p-8 md:p-12 text-center">
+                <h3 class="text-3xl font-bold mb-4 text-[#006994]" style="font-family: 'Playfair Display', serif;">
+                    Destination Weddings
+                </h3>
+                <p class="text-lg text-gray-700 mb-6 max-w-3xl mx-auto">
+                    Host a romantic outdoor waterfront ceremony with spectacular sunset views. Our main lounge welcomes up to 500 people,
+                    with additional rooms available. We handle everything from flowers and decorations to music and catering.
+                </p>
+                <a href="#reservations" class="btn-primary">Plan Your Destination Wedding</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservations Section -->
+    <section id="reservations" class="py-20 md:py-32 bg-gradient-to-b from-[#E8F4F8] to-white relative z-10">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-[#006994]" style="font-family: 'Playfair Display', serif;">
+                    Make a Reservation
+                </h2>
+                <div class="section-divider"></div>
+                <p class="text-lg max-w-2xl mx-auto text-gray-700">
+                    Join us for an unforgettable dining experience. Book your table today.
+                </p>
+            </div>
+
+            <!-- Quick Contact -->
+            <div class="grid md:grid-cols-2 gap-6 mb-12 fade-in">
+                <div class="bg-white p-8 rounded-lg shadow-lg text-center">
+                    <div class="text-4xl mb-4">📞</div>
+                    <h3 class="text-2xl font-bold mb-2 text-[#006994]" style="font-family: 'Playfair Display', serif;">
+                        Call Us
+                    </h3>
+                    <p class="text-gray-600 mb-4">Reservations are recommended</p>
+                    <a href="tel:787-900-4563" class="text-xl font-bold text-[#006994] hover:underline">(787) 900-4563</a>
+                    <p class="text-sm text-gray-500 mt-2">Salinas & Events</p>
+                    <a href="tel:787-824-1900" class="text-xl font-bold text-[#006994] hover:underline block mt-2">(787) 824-1900</a>
+                    <p class="text-sm text-gray-500">San Juan</p>
+                </div>
+
+                <div class="bg-white p-8 rounded-lg shadow-lg text-center">
+                    <div class="text-4xl mb-4">✉️</div>
+                    <h3 class="text-2xl font-bold mb-2 text-[#006994]" style="font-family: 'Playfair Display', serif;">
+                        Email Us
+                    </h3>
+                    <p class="text-gray-600 mb-4">For events and inquiries</p>
+                    <a href="mailto:ladisrest@gmail.com" class="text-lg font-bold text-[#006994] hover:underline break-all">ladisrest@gmail.com</a>
+                </div>
+            </div>
+
+            <!-- Reservation Form -->
+            <div class="bg-white rounded-2xl shadow-2xl p-8 md:p-12 fade-in">
+                <h3 class="text-3xl font-bold mb-6 text-center text-[#006994]" style="font-family: 'Playfair Display', serif;">
+                    Online Reservation Request
+                </h3>
+                <form id="reservationForm" class="space-y-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">Full Name *</label>
+                            <input type="text" id="name" name="name" required class="form-input" placeholder="Your name">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">Email *</label>
+                            <input type="email" id="email" name="email" required class="form-input" placeholder="your@email.com">
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="phone" class="block text-sm font-semibold text-gray-700 mb-2">Phone *</label>
+                            <input type="tel" id="phone" name="phone" required class="form-input" placeholder="(787) 000-0000">
+                        </div>
+                        <div>
+                            <label for="location" class="block text-sm font-semibold text-gray-700 mb-2">Location *</label>
+                            <select id="location" name="location" required class="form-input">
+                                <option value="">Select location</option>
+                                <option value="salinas">Salinas - Playa de Salinas</option>
+                                <option value="sanjuan">San Juan - Puerta de Tierra</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div>
+                            <label for="date" class="block text-sm font-semibold text-gray-700 mb-2">Date *</label>
+                            <input type="date" id="date" name="date" required class="form-input">
+                        </div>
+                        <div>
+                            <label for="time" class="block text-sm font-semibold text-gray-700 mb-2">Time *</label>
+                            <select id="time" name="time" required class="form-input">
+                                <option value="">Select time</option>
+                                <option value="11:00">11:00 AM</option>
+                                <option value="11:30">11:30 AM</option>
+                                <option value="12:00">12:00 PM</option>
+                                <option value="12:30">12:30 PM</option>
+                                <option value="13:00">1:00 PM</option>
+                                <option value="13:30">1:30 PM</option>
+                                <option value="14:00">2:00 PM</option>
+                                <option value="14:30">2:30 PM</option>
+                                <option value="15:00">3:00 PM</option>
+                                <option value="17:00">5:00 PM</option>
+                                <option value="17:30">5:30 PM</option>
+                                <option value="18:00">6:00 PM</option>
+                                <option value="18:30">6:30 PM</option>
+                                <option value="19:00">7:00 PM</option>
+                                <option value="19:30">7:30 PM</option>
+                                <option value="20:00">8:00 PM</option>
+                                <option value="20:30">8:30 PM</option>
+                                <option value="21:00">9:00 PM</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="guests" class="block text-sm font-semibold text-gray-700 mb-2">Guests *</label>
+                            <select id="guests" name="guests" required class="form-input">
+                                <option value="">Number of guests</option>
+                                <option value="1">1 Guest</option>
+                                <option value="2">2 Guests</option>
+                                <option value="3">3 Guests</option>
+                                <option value="4">4 Guests</option>
+                                <option value="5">5 Guests</option>
+                                <option value="6">6 Guests</option>
+                                <option value="7">7 Guests</option>
+                                <option value="8">8 Guests</option>
+                                <option value="10">10+ Guests</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="message" class="block text-sm font-semibold text-gray-700 mb-2">Special Requests (Optional)</label>
+                        <textarea id="message" name="message" rows="4" class="form-input" placeholder="Any dietary restrictions, special occasions, or preferences..."></textarea>
+                    </div>
+
+                    <div class="text-center pt-4">
+                        <button type="submit" class="btn-primary text-lg">
+                            Submit Reservation Request
+                        </button>
+                        <p class="text-sm text-gray-500 mt-4">We'll contact you to confirm your reservation</p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <!-- Column 1: About -->
+                <div>
+                    <h4 class="text-2xl font-bold mb-4" style="font-family: 'Playfair Display', serif;">Ladi's Place</h4>
+                    <p class="text-sm mb-4 opacity-90">
+                        Puerto Rico's premier seafood restaurant since 1949. Home of the famous Mojo Isleño.
+                    </p>
+                    <p class="text-sm font-semibold">Este negocio es 100% puertorriqueño 🇵🇷</p>
+                </div>
+
+                <!-- Column 2: Salinas Location -->
+                <div>
+                    <h4 class="text-xl font-bold mb-4" style="font-family: 'Playfair Display', serif;">Salinas Location</h4>
+                    <p class="text-sm mb-2">Calle A-86 Playa de Salinas</p>
+                    <p class="text-sm mb-2">Salinas, PR 00751</p>
+                    <p class="text-sm mb-2">
+                        <a href="tel:787-900-4563" class="hover:underline">📞 (787) 900-4563</a>
+                    </p>
+                    <p class="text-sm">
+                        <a href="mailto:ladisrest@gmail.com" class="hover:underline">✉️ ladisrest@gmail.com</a>
+                    </p>
+                </div>
+
+                <!-- Column 3: San Juan Location -->
+                <div>
+                    <h4 class="text-xl font-bold mb-4" style="font-family: 'Playfair Display', serif;">San Juan Location</h4>
+                    <p class="text-sm mb-2">Avenida Luis Muñoz Rivera</p>
+                    <p class="text-sm mb-2">San Juan, PR 00907</p>
+                    <p class="text-sm mb-2">
+                        <a href="tel:787-824-1900" class="hover:underline">📞 (787) 824-1900</a>
+                    </p>
+                    <p class="text-sm mb-4">
+                        <strong>Hours:</strong><br>
+                        Sun-Thu: 11AM-10PM<br>
+                        Fri-Sat: 11AM-12AM
+                    </p>
+                </div>
+            </div>
+
+            <div class="border-t border-white border-opacity-20 pt-8 text-center">
+                <p class="text-sm opacity-90">
+                    © 2025 Ladi's Place Restaurant. All rights reserved. | Serving Puerto Rico Since 1949
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // ========== CANVAS PARTICLE ANIMATION - OCEAN WAVES ==========
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Particle class for ocean bubbles and waves
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.speedY = Math.random() * 0.5 - 0.25;
+                this.opacity = Math.random() * 0.3 + 0.2;
+                this.color = ['rgba(0, 105, 148, 0.3)', 'rgba(0, 137, 184, 0.25)', 'rgba(137, 207, 240, 0.35)', 'rgba(184, 221, 232, 0.4)'][Math.floor(Math.random() * 4)];
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                // Gentle wave motion
+                this.x += Math.sin(Date.now() * 0.0005 + this.y * 0.01) * 0.2;
+                this.y += Math.cos(Date.now() * 0.0005 + this.x * 0.01) * 0.2;
+
+                // Wrap around edges
+                if (this.x < -20) this.x = canvas.width + 20;
+                if (this.x > canvas.width + 20) this.x = -20;
+                if (this.y < -20) this.y = canvas.height + 20;
+                if (this.y > canvas.height + 20) this.y = -20;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.opacity;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        const particles = [];
+        const particleCount = window.innerWidth < 768 ? 30 : 50;
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+
+            requestAnimationFrame(animateParticles);
+        }
+
+        animateParticles();
+
+        // ========== NAVIGATION SCROLL EFFECT ==========
+        const navbar = document.getElementById('navbar');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // ========== MOBILE MENU ==========
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMenuBtn = document.getElementById('close-menu-btn');
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+        });
+
+        closeMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+        });
+
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // ========== SCROLL ANIMATIONS ==========
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // ========== SMOOTH SCROLLING ==========
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // ========== PRELOAD IMAGES ==========
+        window.addEventListener('load', () => {
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                if (img.complete) {
+                    img.classList.add('loaded');
+                } else {
+                    img.addEventListener('load', () => {
+                        img.classList.add('loaded');
+                    });
+                }
+            });
+        });
+
+        // ========== FORM SUBMISSION ==========
+        const reservationForm = document.getElementById('reservationForm');
+
+        reservationForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Get form data
+            const formData = new FormData(reservationForm);
+            const data = Object.fromEntries(formData);
+
+            // Create mailto link with form data
+            const subject = `Reservation Request - ${data.location}`;
+            const body = `
+Name: ${data.name}
+Email: ${data.email}
+Phone: ${data.phone}
+Location: ${data.location}
+Date: ${data.date}
+Time: ${data.time}
+Number of Guests: ${data.guests}
+Special Requests: ${data.message || 'None'}
+            `.trim();
+
+            const mailtoLink = `mailto:ladisrest@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+            // Open email client
+            window.location.href = mailtoLink;
+
+            // Show confirmation
+            alert('Thank you! Your email client will open to send your reservation request. We will contact you shortly to confirm.');
+
+            // Reset form
+            reservationForm.reset();
+        });
+
+        // ========== SET MIN DATE FOR RESERVATION ==========
+        const dateInput = document.getElementById('date');
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.setAttribute('min', today);
+    </script>
 </body>
 </html>
